@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  WindowsViewController.swift
 //  Windows
 //
 //  Created by xcv on 06/02/2021.
@@ -7,13 +7,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class WindowsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
     }
-
-
+    
 }
-
