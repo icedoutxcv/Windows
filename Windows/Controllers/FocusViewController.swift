@@ -7,79 +7,116 @@
 
 import UIKit
 
-class FocusViewController: UIViewController {
+class FocusViewController: UIViewController, UIGestureRecognizerDelegate {
     var timerView: TimerView!
     var startButton = UIButton()
+    var detailsContainer = UIStackView()
+    var sessionView = UIStackView()
+    var sessionLabel = UILabel()
+    var breakLabel = UILabel()
+    var breakView = UIStackView()
+    var sessionDuration = UILabel()
+    var breakDuration = UILabel()
     
-    var seconds = 60
     var timer = Timer()
-    var isTimerRunning = false
     
-    @objc func runTimer() {
-         timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
-    }
+    var currentSessionIndex = 0
+    let sessionDurations: [Int] = [5,10,15,20,25,30]
     
-    @objc func updateTimer() {
-        seconds -= 1     //This will decrement(count down)the seconds.
-        startButton.setTitle("\(seconds)", for: .normal) //This will update the label.
-    }
-
+    var currentBreakIndex = 0
+    let breakDurations: [Int] = [5,10,15]
+    
+    var duration = 5 * 60
+    var seconds = 5 * 60
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        startButton.tag = 0
         setupViews()
-        setupConstraints()
     }
     
-    func setupViews() {
-        view.backgroundColor = UIColor(red: 254, green: 228, blue: 0, alpha: 25)
-        navigationItem.title = "Focus"
-        setupDarkNavBar()
-
-        timerView = TimerView(frame: CGRect(x: 0, y: 0, width: view.frame.width / 1.5, height: view.frame.height / 1.5))
-        timerView.translatesAutoresizingMaskIntoConstraints = false
-        timerView.center = view.center
-        timerView.layer.zPosition = -1
-
-        startButton.setTitleColor(.black, for: .normal)
-        startButton.setTitle("Start", for: .normal)
-        startButton.titleLabel?.font = UIFont.systemFont(ofSize: 28)
-        startButton.translatesAutoresizingMaskIntoConstraints = false
-        startButton.addTarget(self, action: #selector(runTimer), for: .touchUpInside)
-        
-        view.addSubview(timerView)
-        view.addSubview(startButton)
-    }
-        
-    func setupConstraints() {
-        startButton.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor).isActive = true
-        startButton.centerYAnchor.constraint(equalTo: view.layoutMarginsGuide.centerYAnchor).isActive = true
-
-        startButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        startButton.widthAnchor.constraint(equalToConstant: 90).isActive = true
+    @objc func toggleAction() {
+        if startButton.tag == 0 {
+            startButton.tag = 1
+            startTimer()
+            
+        } else {
+            startButton.tag = 0
+            stopTimer()
+        }
     }
     
+    func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self,  selector: (#selector(start)), userInfo: nil, repeats: true)
+    }
+    
+    func stopTimer() {
+        timer.invalidate()
+        seconds = sessionDurations[0] * 60
+        duration = breakDurations[0] * 60
+        
+        setActionButtonTitle(text: "Start", animated: true)
+        timerView.changeProgressValue(to: 0)
+    }
+    
+    @objc func resetTimer() {
+        startButton.tag = 0
+        stopTimer()
+        
+        setActionButtonTitle(text: "Start", animated: true)
+        seconds = sessionDurations[currentSessionIndex] * 60
+        timerView.changeProgressValue(to: 0)
+    }
+    
+    
+      @objc func start() {
+          seconds = sessionDurations[currentSessionIndex] * 60
+
+          seconds -= 1
+          
+          let formatter = DateComponentsFormatter()
+          formatter.allowedUnits = [.hour, .minute, .second]
+          formatter.unitsStyle = .positional
+          
+          let totalTime = sessionDurations[currentSessionIndex] * 60
+          let formattedString = formatter.string(from: TimeInterval(seconds))!
+          let percentageTime = Float(Float(totalTime-seconds)/Float(totalTime))
+          let valueForTimer = percentageTime * 100
+          
+          if seconds <= sessionDurations[currentSessionIndex] * 60 {
+              timerView.changeProgressValue(to: Float(valueForTimer))
+              setActionButtonTitle(text: formattedString, animated: false)
+          }
+      }
+
+    @objc func sessionClicked() {
+        stopTimer()
+        if currentSessionIndex < sessionDurations.count - 1 {
+            currentSessionIndex += 1
+            seconds = sessionDurations[currentSessionIndex] * 60
+            sessionDuration.text = String(sessionDurations[currentSessionIndex])
+        } else {
+            currentSessionIndex = 0
+            sessionDuration.text = String(sessionDurations[currentSessionIndex])
+        }
+    }
+    
+    @objc func breakClicked() {
+        stopTimer()
+        if currentBreakIndex < breakDurations.count - 1 {
+            currentBreakIndex += 1
+            seconds = breakDurations[currentBreakIndex] * 60
+            breakDuration.text = String(breakDurations[currentBreakIndex])
+        } else {
+            currentBreakIndex = 0
+            breakDuration.text = String(breakDurations[currentBreakIndex])
+        }
+    }
+
     @objc func startButtonClicked() {
         timerView.changeProgressValue(to: Float(Int.random(in: 1...100)))
     }
-    
-    func setupDarkNavBar() {
-        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.yellow]
-        navigationController?.navigationBar.titleTextAttributes = textAttributes
-        navigationController?.navigationBar.barStyle = .default
-        navigationController?.navigationBar.barTintColor = .black
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-            super.traitCollectionDidChange(previousTraitCollection)
-        
-        // no white-mode
-        setupDarkNavBar()
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
+
 }
 

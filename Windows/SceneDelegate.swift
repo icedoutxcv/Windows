@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarController = UITabBarController()
         tabBarController.tabBar.barTintColor = .black
         tabBarController.tabBar.tintColor = .yellow
-
+        
         firstTabNavigationController = UINavigationController(rootViewController: FocusViewController())
         secondTabNavigationControoller = UINavigationController(rootViewController: WindowsViewController())
         
