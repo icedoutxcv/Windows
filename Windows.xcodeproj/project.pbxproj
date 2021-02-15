@@ -14,13 +14,12 @@
 		0307FFBF25CEBF4200BDD765 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0307FFBD25CEBF4200BDD765 /* LaunchScreen.storyboard */; };
 		0307FFDE25CEC61100BDD765 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307FFDD25CEC61100BDD765 /* TimerView.swift */; };
 		0307FFE625CEFD7100BDD765 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307FFE525CEFD7100BDD765 /* UIViewController+Extension.swift */; };
-		031E504725D6FBDE0061FEDB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E504625D6FBDE0061FEDB /* Color.swift */; };
 		031E504D25D70B870061FEDB /* FocusViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031E504C25D70B870061FEDB /* FocusViewController+Extension.swift */; };
+		0376CA6B25DB0F5E008DF135 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0376CA6D25DB0F5E008DF135 /* Localizable.strings */; };
 		03E3DEE425DAAC910053644C /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3DEE325DAAC910053644C /* CustomLabel.swift */; };
 		03E3DEEA25DAB12B0053644C /* TimerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3DEE925DAB12B0053644C /* TimerType.swift */; };
 		03E3DEF125DAB5050053644C /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3DEF025DAB5050053644C /* FocusView.swift */; };
 		03E3DEFA25DAC0030053644C /* ButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3DEF925DAC0030053644C /* ButtonState.swift */; };
-		03E3DF0125DAC3D50053644C /* StatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3DF0025DAC3D50053644C /* StatusLabel.swift */; };
 		03E3DF0625DAD6610053644C /* VIbration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3DF0525DAD6610053644C /* VIbration.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,13 +33,13 @@
 		0307FFC025CEBF4200BDD765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0307FFDD25CEC61100BDD765 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		0307FFE525CEFD7100BDD765 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
-		031E504625D6FBDE0061FEDB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		031E504C25D70B870061FEDB /* FocusViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FocusViewController+Extension.swift"; sourceTree = "<group>"; };
+		0376CA6C25DB0F5E008DF135 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0376CA6F25DB0F6A008DF135 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		03E3DEE325DAAC910053644C /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		03E3DEE925DAB12B0053644C /* TimerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerType.swift; sourceTree = "<group>"; };
 		03E3DEF025DAB5050053644C /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
 		03E3DEF925DAC0030053644C /* ButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonState.swift; sourceTree = "<group>"; };
-		03E3DF0025DAC3D50053644C /* StatusLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusLabel.swift; sourceTree = "<group>"; };
 		03E3DF0525DAD6610053644C /* VIbration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIbration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +81,7 @@
 				0307FFE925CF025100BDD765 /* Views */,
 				03E3DF0425DAD6570053644C /* Other */,
 				0307FFBB25CEBF4200BDD765 /* Assets.xcassets */,
+				0376CA6D25DB0F5E008DF135 /* Localizable.strings */,
 				0307FFBD25CEBF4200BDD765 /* LaunchScreen.storyboard */,
 				0307FFC025CEBF4200BDD765 /* Info.plist */,
 			);
@@ -118,10 +118,8 @@
 		0307FFF025CF027B00BDD765 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				031E504625D6FBDE0061FEDB /* Color.swift */,
 				03E3DEE925DAB12B0053644C /* TimerType.swift */,
 				03E3DEF925DAC0030053644C /* ButtonState.swift */,
-				03E3DF0025DAC3D50053644C /* StatusLabel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,6 +173,7 @@
 			knownRegions = (
 				en,
 				Base,
+				pl,
 			);
 			mainGroup = 0307FFA625CEBF4000BDD765;
 			productRefGroup = 0307FFB025CEBF4000BDD765 /* Products */;
@@ -192,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0307FFBF25CEBF4200BDD765 /* LaunchScreen.storyboard in Resources */,
+				0376CA6B25DB0F5E008DF135 /* Localizable.strings in Resources */,
 				0307FFBC25CEBF4200BDD765 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,10 +208,8 @@
 				0307FFDE25CEC61100BDD765 /* TimerView.swift in Sources */,
 				03E3DEEA25DAB12B0053644C /* TimerType.swift in Sources */,
 				031E504D25D70B870061FEDB /* FocusViewController+Extension.swift in Sources */,
-				03E3DF0125DAC3D50053644C /* StatusLabel.swift in Sources */,
 				0307FFB725CEBF4000BDD765 /* FocusViewController.swift in Sources */,
 				03E3DEE425DAAC910053644C /* CustomLabel.swift in Sources */,
-				031E504725D6FBDE0061FEDB /* Color.swift in Sources */,
 				03E3DEFA25DAC0030053644C /* ButtonState.swift in Sources */,
 				0307FFB325CEBF4000BDD765 /* AppDelegate.swift in Sources */,
 				0307FFB525CEBF4000BDD765 /* SceneDelegate.swift in Sources */,
@@ -230,6 +228,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		0376CA6D25DB0F5E008DF135 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0376CA6C25DB0F5E008DF135 /* en */,
+				0376CA6F25DB0F6A008DF135 /* pl */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -237,6 +244,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -298,6 +306,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  Windows
+
+  Created by xcv on 15/02/2021.
+  
+*/
+
+"Not started" = "Nie rozpoczęto";
+"Start" = "Start";
+"Session" = "Sesja";
+"Session.." = "Sesja..";
+"Break" = "Przerwa";
+"Break.." = "Przerwa..";
+"Session paused" = "Sesja zapauzowana";
+"Break paused" = "Przerwa zapauzowana";

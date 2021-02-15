@@ -22,12 +22,12 @@ class FocusView: UIView {
     var statusLabel: CustomLabel = {
         let label = CustomLabel(withInsets: 10, 10, 10, 10)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = Color.lightLabel
-        label.text = "Not started"
+        label.textColor = UIColor(named: "lightLabel")
+        label.text = NSLocalizedString("Not started", comment: "")
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        label.layer.backgroundColor = Color.chocoBackground.cgColor
+        label.layer.backgroundColor = UIColor(named: "chocoBg")?.cgColor
         label.layer.cornerRadius = 6
         return label
     }()
@@ -35,10 +35,10 @@ class FocusView: UIView {
     var startButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(Color.lightLabel, for: .normal)
+        button.setTitleColor(UIColor(named: "lightLabel"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        button.setTitle("Start", for: .normal)
-        button.backgroundColor = Color.chocoBackground
+        button.setTitle(NSLocalizedString("Start", comment: ""), for: .normal)
+        button.backgroundColor = UIColor(named: "chocoBg")
         button.layer.cornerRadius = 60
         button.clipsToBounds = true
         return button
@@ -55,7 +55,7 @@ class FocusView: UIView {
     
     var containerSessionView: UIView = {
         let view = UIView()
-        view.backgroundColor = Color.chocoBackground
+        view.backgroundColor = UIColor(named: "chocoBg")
         view.layer.cornerRadius = 6
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -74,22 +74,22 @@ class FocusView: UIView {
     
     var sessionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Session"
-        label.textColor = Color.lightLabel
+        label.text = NSLocalizedString("Session", comment: "")
+        label.textColor = UIColor(named: "lightLabel")
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         return label
     }()
     
     var sessionDuration: UILabel = {
         let label = UILabel()
-        label.textColor = Color.grayLabel
+        label.textColor = UIColor(named: "grayLabel")
         label.font = UIFont.systemFont(ofSize: 28, weight: .medium)
         return label
     }()
     
     var containerBreakView: UIView = {
         let view = UIView()
-        view.backgroundColor = Color.chocoBackground
+        view.backgroundColor = UIColor(named: "chocoBg")
         view.layer.cornerRadius = 6
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -108,15 +108,15 @@ class FocusView: UIView {
     
     var breakLabel: UILabel = {
         let label = UILabel()
-        label.text = "Break"
-        label.textColor = Color.lightLabel
+        label.text = NSLocalizedString("Break", comment: "")
+        label.textColor = UIColor(named: "lightLabel")
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         return label
     }()
     
     var breakDuration: UILabel = {
         let label = UILabel()
-        label.textColor = Color.grayLabel
+        label.textColor = UIColor(named: "grayLabel")
         label.font = UIFont.systemFont(ofSize: 28, weight: .medium)
         return label
     }()
@@ -133,7 +133,7 @@ class FocusView: UIView {
     }
     
     func setupViews() {
-        backgroundColor = Color.background
+        backgroundColor = UIColor(named: "background")
     }
     
     func setupHierarchy() {
@@ -178,6 +178,7 @@ class FocusView: UIView {
         sessionView.leadingAnchor.constraint(equalTo: containerSessionView.leadingAnchor).isActive = true
     }
     
+    // MARK: Set startButton label text
     func setActionButtonTitle(text: String, animated: Bool) {
         if animated {
             UIView.transition(with: self.startButton, duration: 0.5, options: .transitionCrossDissolve, animations: {
@@ -188,6 +189,7 @@ class FocusView: UIView {
         }
     }
     
+    // MARK: Set status label text
     func setStatusText(text: String, animated: Bool) {
         if animated {
             UIView.transition(with: self.startButton, duration: 0.5, options: .transitionCrossDissolve, animations: {
@@ -198,13 +200,14 @@ class FocusView: UIView {
         }
     }
     
+    // MARK: Update session duration label text
     func updateSessionDuration(duration: Int) {
         sessionDuration.text = String(duration)
     }
     
+    // MARK: Update session break label text
     func updateBreakDuration(duration: Int) {
         breakDuration.text = String(duration)
     }
     
- 
 }

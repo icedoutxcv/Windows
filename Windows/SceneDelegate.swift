@@ -20,7 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene as! UIWindowScene)
         window?.windowScene = windowScene
         
-
         let tabBarController = UITabBarController()
         tabBarController.tabBar.barTintColor = .black
         tabBarController.tabBar.tintColor = .yellow
