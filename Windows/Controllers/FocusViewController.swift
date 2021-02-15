@@ -8,115 +8,183 @@
 import UIKit
 
 class FocusViewController: UIViewController, UIGestureRecognizerDelegate {
-    var timerView: TimerView!
-    var startButton = UIButton()
-    var detailsContainer = UIStackView()
-    var sessionView = UIStackView()
-    var sessionLabel = UILabel()
-    var breakLabel = UILabel()
-    var breakView = UIStackView()
-    var sessionDuration = UILabel()
-    var breakDuration = UILabel()
-    
+    var focusView: FocusView!
+
     var timer = Timer()
-    
-    var currentSessionIndex = 0
+    var typeTimer = TimerType.sessionTimer
+    var seconds = 5 * 60
+
+    var currentSessionIndex = 4
     let sessionDurations: [Int] = [5,10,15,20,25,30]
     
     var currentBreakIndex = 0
     let breakDurations: [Int] = [5,10,15]
     
-    var duration = 5 * 60
-    var seconds = 5 * 60
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        startButton.tag = 0
+
         setupViews()
+        setupGestures()
+        setupTimer()
+    }
+    
+    func setupViews() {
+        setupDarkNavBar()
+        
+        focusView = FocusView(frame: view.frame)
+        focusView.updateSessionDuration(duration: sessionDurations[currentSessionIndex])
+        focusView.updateBreakDuration(duration: breakDurations[currentBreakIndex])
+        focusView.startButton.addTarget(self, action: #selector(toggleAction), for: .touchUpInside)
+        
+        view.addSubview(focusView)
+    }
+    
+    func setupGestures() {
+        let tapGestureSession = UITapGestureRecognizer(target: self, action: #selector(sessionClicked))
+        tapGestureSession.delegate = self
+        tapGestureSession.numberOfTapsRequired = 1
+        focusView.containerSessionView.addGestureRecognizer(tapGestureSession)
+        
+        let tapGestureBreak = UITapGestureRecognizer(target: self, action: #selector(breakClicked))
+        tapGestureBreak.delegate = self
+        tapGestureBreak.numberOfTapsRequired = 1
+        focusView.containerBreakView.addGestureRecognizer(tapGestureBreak)
+        
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(resetTimer))
+        focusView.startButton.addGestureRecognizer(longGesture)
+    }
+    
+    func setupTimer() {
+        // MARK: 0 - state for stopped timer, 1 - for started
+        focusView.startButtonState = .stopped
+        
+        // MARK: Calculate total time of session with break
+        seconds = (sessionDurations[currentSessionIndex] * 60) + (breakDurations[currentBreakIndex] * 60)
     }
     
     @objc func toggleAction() {
-        if startButton.tag == 0 {
-            startButton.tag = 1
+        if focusView.startButtonState == .stopped {
+            focusView.startButtonState = .started
             startTimer()
-            
         } else {
-            startButton.tag = 0
+            focusView.startButtonState = .stopped
             stopTimer()
         }
     }
     
     func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self,  selector: (#selector(start)), userInfo: nil, repeats: true)
+        
+        Vibration.success.vibrate()
     }
     
     func stopTimer() {
         timer.invalidate()
-        seconds = sessionDurations[0] * 60
-        duration = breakDurations[0] * 60
+        updateStatusLabel(state: .paused)
         
-        setActionButtonTitle(text: "Start", animated: true)
-        timerView.changeProgressValue(to: 0)
+        Vibration.heavy.vibrate()
     }
     
     @objc func resetTimer() {
-        startButton.tag = 0
-        stopTimer()
+        focusView.startButtonState = .stopped
+        typeTimer = .sessionTimer
+
+        timer.invalidate()
         
-        setActionButtonTitle(text: "Start", animated: true)
-        seconds = sessionDurations[currentSessionIndex] * 60
-        timerView.changeProgressValue(to: 0)
+        focusView.setActionButtonTitle(text: StartLabel.start.rawValue, animated: true)
+        focusView.setStatusText(text: StatusLabel.notStartedText.rawValue, animated: true)
+        
+        // MARK: Calculate total time of session with break
+        seconds = (sessionDurations[currentSessionIndex] * 60) + (breakDurations[currentBreakIndex] * 60)
+        focusView.timerView.setProgressValue(to: 0)
+        
+        Vibration.rigid.vibrate()
     }
     
     
-      @objc func start() {
-          seconds = sessionDurations[currentSessionIndex] * 60
+    @objc func start() {
+        let totalTime = (sessionDurations[currentSessionIndex] * 60) + (breakDurations[currentBreakIndex] * 60)
+        
+        if seconds > 0 {
+            seconds -= 1
+            
+            let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.hour, .minute, .second]
+            formatter.unitsStyle = .positional
+            
+            let formattedString = formatter.string(from: TimeInterval(seconds))!
+            let percentageTime = Float(Float(totalTime-seconds)/Float(totalTime))
+            let valueForTimer = percentageTime * 100
+            
+            if seconds <= (sessionDurations[currentSessionIndex] * 60) + (breakDurations[currentBreakIndex] * 60) {
+                focusView.timerView.setProgressValue(to: Float(valueForTimer))
+                focusView.setActionButtonTitle(text: "\(formattedString)", animated: false)
+            }
+            
+            updateTimerType()
+            updateStatusLabel(state: .running)
+        } else {
+            resetTimer()
+        }
 
-          seconds -= 1
-          
-          let formatter = DateComponentsFormatter()
-          formatter.allowedUnits = [.hour, .minute, .second]
-          formatter.unitsStyle = .positional
-          
-          let totalTime = sessionDurations[currentSessionIndex] * 60
-          let formattedString = formatter.string(from: TimeInterval(seconds))!
-          let percentageTime = Float(Float(totalTime-seconds)/Float(totalTime))
-          let valueForTimer = percentageTime * 100
-          
-          if seconds <= sessionDurations[currentSessionIndex] * 60 {
-              timerView.changeProgressValue(to: Float(valueForTimer))
-              setActionButtonTitle(text: formattedString, animated: false)
-          }
-      }
+    }
+    
+    func updateTimerType() {
+        if seconds <= (breakDurations[currentBreakIndex] * 60) {
+            if typeTimer != .breakTimer {
+                typeTimer = .breakTimer
+            }
+        }
+    }
+    
 
+    func updateStatusLabel(state: TimerState) {
+        if state == .running {
+            if typeTimer == .sessionTimer && focusView.statusLabel.text != StatusLabel.sessionText.rawValue {
+                focusView.setStatusText(text: StatusLabel.sessionText.rawValue, animated: true)
+            } else if typeTimer == .breakTimer && focusView.statusLabel.text != StatusLabel.breakText.rawValue {
+                focusView.setStatusText(text: StatusLabel.breakText.rawValue, animated: true)
+            }
+            
+        } else if state == .paused{
+           
+            switch typeTimer {
+            case .breakTimer:
+                focusView.setStatusText(text: StatusLabel.breakPausedText.rawValue, animated: true)
+            case .sessionTimer:
+                focusView.setStatusText(text: StatusLabel.sessionPausedText.rawValue, animated: true)
+            }
+        }
+        
+       
+    }
+    
     @objc func sessionClicked() {
-        stopTimer()
         if currentSessionIndex < sessionDurations.count - 1 {
             currentSessionIndex += 1
-            seconds = sessionDurations[currentSessionIndex] * 60
-            sessionDuration.text = String(sessionDurations[currentSessionIndex])
+            focusView.updateSessionDuration(duration: sessionDurations[currentSessionIndex])
         } else {
             currentSessionIndex = 0
-            sessionDuration.text = String(sessionDurations[currentSessionIndex])
+            focusView.updateSessionDuration(duration: sessionDurations[currentSessionIndex])
         }
+        resetTimer()
+        
+        Vibration.soft.vibrate()
     }
     
     @objc func breakClicked() {
-        stopTimer()
         if currentBreakIndex < breakDurations.count - 1 {
             currentBreakIndex += 1
-            seconds = breakDurations[currentBreakIndex] * 60
-            breakDuration.text = String(breakDurations[currentBreakIndex])
+            focusView.updateBreakDuration(duration: breakDurations[currentBreakIndex])
         } else {
             currentBreakIndex = 0
-            breakDuration.text = String(breakDurations[currentBreakIndex])
+            focusView.updateBreakDuration(duration: breakDurations[currentBreakIndex])
         }
-    }
+        resetTimer()
+        
+        Vibration.soft.vibrate()
 
-    @objc func startButtonClicked() {
-        timerView.changeProgressValue(to: Float(Int.random(in: 1...100)))
     }
-
+    
 }
 

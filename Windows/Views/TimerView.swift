@@ -53,13 +53,13 @@ class TimerView: UIView {
 
     }
     
-    func changeProgressValue(to percent: Float){
-           secondShapeLayer.strokeEnd = CGFloat(percent/100)
-
-    }
-    
+//    func changeProgressValue(to percent: Float){
+//          
+//
+//    }
+//    
     func setProgressValue(to percent: Float) {
-        changeProgressValue(to: percent)
+        secondShapeLayer.strokeEnd = CGFloat(percent/100)
     }
 
 

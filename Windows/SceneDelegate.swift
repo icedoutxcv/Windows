@@ -26,15 +26,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarController.tabBar.tintColor = .yellow
         
         firstTabNavigationController = UINavigationController(rootViewController: FocusViewController())
-        secondTabNavigationControoller = UINavigationController(rootViewController: WindowsViewController())
-        
-        let firstItem = UITabBarItem(title: "Focus", image: UIImage(systemName: "timer"), tag: 0)
-        let secondItem = UITabBarItem(title: "Windows", image: UIImage(systemName: "rectangle.grid.1x2"), tag: 0)
-        
-        firstTabNavigationController.tabBarItem = firstItem
-        secondTabNavigationControoller.tabBarItem = secondItem
 
-        tabBarController.viewControllers = [firstTabNavigationController, secondTabNavigationControoller]
+        let firstItem = UITabBarItem(title: "Focus", image: UIImage(systemName: "timer"), tag: 0)
+
+        firstTabNavigationController.tabBarItem = firstItem
+
+        tabBarController.viewControllers = [firstTabNavigationController]
 
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
