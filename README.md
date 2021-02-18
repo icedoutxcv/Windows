@@ -4,10 +4,9 @@ Windows is a pomodoro-like app written in Swift.
 
 # Screenshots
 
-![](README/screenshots/screenshot1.png)
-![](README/screenshots/screenshot2.png)
-![](README/screenshots/screenshot3.png)
-![](README/screenshots/animated.gif)
+![](README/screenshots/screenshot1.png) 
+<br/><br/> 
+![](README/screenshots/animated.gif) 
 
 
 
