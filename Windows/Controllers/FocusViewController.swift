@@ -124,7 +124,7 @@ class FocusViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // MARK: Check if elapsed second are not negative
         if seconds > 0 {
-            seconds -= 30
+            seconds -= 1
             
             // MARK: Add formatter
             let formatter = DateComponentsFormatter()
