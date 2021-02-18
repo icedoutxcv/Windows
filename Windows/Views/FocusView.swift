@@ -19,7 +19,7 @@ class FocusView: UIView {
         return timerView
     }()
     
-    var statusLabel: CustomLabel = {
+    let statusLabel: CustomLabel = {
         let label = CustomLabel(withInsets: 10, 10, 10, 10)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(named: "lightLabel")
@@ -32,7 +32,7 @@ class FocusView: UIView {
         return label
     }()
     
-    var startButton: UIButton = {
+    let startButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor(named: "lightLabel"), for: .normal)
@@ -44,7 +44,7 @@ class FocusView: UIView {
         return button
     }()
     
-    var detailsContainer: UIStackView = {
+    let detailsContainer: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -53,7 +53,7 @@ class FocusView: UIView {
         return stackView
     }()
     
-    var containerSessionView: UIView = {
+    let containerSessionView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "chocoBg")
         view.layer.cornerRadius = 6
@@ -61,7 +61,7 @@ class FocusView: UIView {
         return view
     }()
     
-    var sessionView: UIStackView = {
+    let sessionView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fillProportionally
@@ -72,7 +72,7 @@ class FocusView: UIView {
         return stackView
     }()
     
-    var sessionLabel: UILabel = {
+    let sessionLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("Session", comment: "")
         label.textColor = UIColor(named: "lightLabel")
@@ -80,14 +80,14 @@ class FocusView: UIView {
         return label
     }()
     
-    var sessionDuration: UILabel = {
+    let sessionDuration: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(named: "grayLabel")
         label.font = UIFont.systemFont(ofSize: 28, weight: .medium)
         return label
     }()
     
-    var containerBreakView: UIView = {
+    let containerBreakView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "chocoBg")
         view.layer.cornerRadius = 6
@@ -95,7 +95,7 @@ class FocusView: UIView {
         return view
     }()
     
-    var breakView: UIStackView = {
+    let breakView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fillProportionally
@@ -106,7 +106,7 @@ class FocusView: UIView {
         return stackView
     }()
     
-    var breakLabel: UILabel = {
+    let breakLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("Break", comment: "")
         label.textColor = UIColor(named: "lightLabel")
@@ -114,7 +114,7 @@ class FocusView: UIView {
         return label
     }()
     
-    var breakDuration: UILabel = {
+    let breakDuration: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(named: "grayLabel")
         label.font = UIFont.systemFont(ofSize: 28, weight: .medium)

@@ -73,17 +73,13 @@
 		0307FFB125CEBF4000BDD765 /* Windows */ = {
 			isa = PBXGroup;
 			children = (
-				0307FFB225CEBF4000BDD765 /* AppDelegate.swift */,
-				0307FFB425CEBF4000BDD765 /* SceneDelegate.swift */,
+				0307FFC025CEBF4200BDD765 /* Info.plist */,
 				0307FFF025CF027B00BDD765 /* Model */,
+				0307FFE925CF025100BDD765 /* Views */,
 				0307FFE825CF023F00BDD765 /* Controllers */,
 				0307FFEA25CF025900BDD765 /* Extensions */,
-				0307FFE925CF025100BDD765 /* Views */,
 				03E3DF0425DAD6570053644C /* Other */,
-				0307FFBB25CEBF4200BDD765 /* Assets.xcassets */,
-				0376CA6D25DB0F5E008DF135 /* Localizable.strings */,
-				0307FFBD25CEBF4200BDD765 /* LaunchScreen.storyboard */,
-				0307FFC025CEBF4200BDD765 /* Info.plist */,
+				03FB4AD325DE9BF100B7FE48 /* Support */,
 			);
 			path = Windows;
 			sourceTree = "<group>";
@@ -130,6 +126,18 @@
 				03E3DF0525DAD6610053644C /* VIbration.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		03FB4AD325DE9BF100B7FE48 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				0307FFBD25CEBF4200BDD765 /* LaunchScreen.storyboard */,
+				0307FFB225CEBF4000BDD765 /* AppDelegate.swift */,
+				0307FFB425CEBF4000BDD765 /* SceneDelegate.swift */,
+				0307FFBB25CEBF4200BDD765 /* Assets.xcassets */,
+				0376CA6D25DB0F5E008DF135 /* Localizable.strings */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
